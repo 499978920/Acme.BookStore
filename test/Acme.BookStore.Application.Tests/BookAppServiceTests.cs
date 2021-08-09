@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Acme.BookStore.Authors;
 using Acme.BookStore.Books;
 using Shouldly;
 using Volo.Abp.Application.Dtos;
@@ -12,10 +13,12 @@ namespace Acme.BookStore
     public class BookAppServiceTests : BookStoreApplicationTestBase
     {
         private readonly IBookAppService _bookAppService;
+        private readonly IAuthorAppService _authorAppService;
 
         public BookAppServiceTests()
         {
-            _bookAppService = GetRequiredService<IBookAppService>();
+            _authorAppService = base.GetRequiredService<IAuthorAppService>();
+            _bookAppService = base.GetRequiredService<IBookAppService>();
         }
 
         [Fact]
@@ -28,16 +31,21 @@ namespace Acme.BookStore
 
             // assert
             result.TotalCount.ShouldBeGreaterThan(0);
-            result.Items.ShouldContain(x => x.Name == "DDD");
+            result.Items.ShouldContain(x => x.Name == "DDD"
+                                            && x.AuthorName == "张三");
         }
 
         [Fact]
         public async Task Should_Create_A_Valid_Book()
         {
+            var authors = await _authorAppService.GetListAsync(new GetAuthorListDto());
+            var firstAuthor = authors.Items.First();
+            
             // act
             var result = await _bookAppService.CreateAsync(
                 new CreateUpdateBookDto()
                 {
+                    AuthorId = firstAuthor.Id,
                     Name = "Test Book",
                     Price = 10,
                     PublishDate = DateTime.Now,
