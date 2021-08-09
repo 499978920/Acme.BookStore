@@ -21,6 +21,13 @@
       "AreYouSureToDelete": "你确定想要删除这一项吗？",
       "BookDeletionConfirmationMessage": "你确定要删除“{0}”这本书吗？",
       "SuccessfullyDeleted": "删除成功！",
+      
+      "Menu:Authors": "作者",
+      "Authors": "作者管理",
+      "AuthorDeletionConfirmationMessage": "你确定要删除“{0}“这个作者吗？",
+      "BirthDate": "出生日期",
+      "NewAuthor": "创建",
+      
       "Enum:BookType:0": "Undefined",
       "Enum:BookType:1": "Adventure",
       "Enum:BookType:2": "Biography",
@@ -30,11 +37,17 @@
       "Enum:BookType:6": "Science",
       "Enum:BookType:7": "Science fiction",
       "Enum:BookType:8": "Poetry",
-      
+
       "Permission:BookStore": "书籍商店",
       "Permission:Books": "书籍管理",
       "Permission:Books:Create": "创建书籍",
       "Permission:Books:Edit": "编辑书籍",
-      "Permission:Books:Delete": "删除书籍"
+      "Permission:Books:Delete": "删除书籍",
+      "Permission:Authors": "作者管理",
+      "Permission:Authors:Create": "创建作者",
+      "Permission:Authors:Edit": "编辑作者",
+      "Permission:Authors:Delete": "删除作者",
+      
+      "BookStore:00001": "已存在相同名称的作者：{name}"
     }
   }

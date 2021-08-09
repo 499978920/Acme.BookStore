@@ -35,14 +35,12 @@ namespace Acme.BookStore.Web.Menus
                     order: 0
                 )
             );
-
-            var bookStoreMenu = context.Menu.AddItem(
-                new ApplicationMenuItem(
-                        "BookStore",
-                        l["Menu:BookStore"],
-                        icon: "fa fa-book"
-                    )
+            var bookStoreMenu = new ApplicationMenuItem(
+                "BookStore",
+                l["Menu:BookStore"],
+                icon: "fa fa-book"
             );
+            context.Menu.AddItem(bookStoreMenu);
 
             if (await context.IsGrantedAsync(BookStorePermissions.Books.Default))
             {
@@ -54,6 +52,21 @@ namespace Acme.BookStore.Web.Menus
                     )
                 );
             }
+            
+            if (await context.IsGrantedAsync(BookStorePermissions.Authors.Default))
+            {
+                bookStoreMenu.AddItem(
+                    new ApplicationMenuItem(
+                        "BookStore.Authors",
+                        l["Menu:Authors"],
+                        url: "/Authors"
+                    )
+                );
+            }
+
+
+            
+            
 
             if (MultiTenancyConsts.IsEnabled)
             {

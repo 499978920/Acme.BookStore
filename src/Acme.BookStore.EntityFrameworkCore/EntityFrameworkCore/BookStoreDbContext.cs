@@ -1,4 +1,5 @@
-﻿using Acme.BookStore.Books;
+﻿using Acme.BookStore.Authors;
+using Acme.BookStore.Books;
 using Microsoft.EntityFrameworkCore;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
@@ -52,7 +53,8 @@ namespace Acme.BookStore.EntityFrameworkCore
         public DbSet<TenantConnectionString> TenantConnectionStrings { get; set; }
 
         public DbSet<Book> Books { get; set; }
-        
+        public DbSet<Author> Authors { get; set; }
+
         #endregion
         
         public BookStoreDbContext(DbContextOptions<BookStoreDbContext> options)
