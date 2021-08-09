@@ -8,7 +8,9 @@ using Microsoft.Extensions.Hosting;
 using Acme.BookStore.EntityFrameworkCore;
 using Acme.BookStore.Localization;
 using Acme.BookStore.MultiTenancy;
+using Acme.BookStore.Permissions;
 using Acme.BookStore.Web.Menus;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.OpenApi.Models;
 using Volo.Abp;
 using Volo.Abp.Account.Web;
@@ -85,6 +87,13 @@ namespace Acme.BookStore.Web
             ConfigureNavigationServices();
             ConfigureAutoApiControllers();
             ConfigureSwaggerServices(context.Services);
+            
+            Configure<RazorPagesOptions>(options =>
+            {
+                options.Conventions.AuthorizePage("/Books/Index", BookStorePermissions.Books.Default);
+                options.Conventions.AuthorizePage("/Books/CreateModal", BookStorePermissions.Books.Create);
+                options.Conventions.AuthorizePage("/Books/EditModal", BookStorePermissions.Books.Edit);
+            });
         }
 
         private void ConfigureUrls(IConfiguration configuration)
